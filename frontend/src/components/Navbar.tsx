@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Boxes,
   LayoutDashboard,
@@ -9,10 +9,11 @@ import {
   ClipboardList,
   Building2,
   Sparkles,
-  LogOut,
-  User as UserIcon
+  User as UserIcon,
+  ChevronDown
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { ProfileDrawer } from './ProfileDrawer';
 
 export type ActiveTab =
   | 'dashboard'
@@ -30,147 +31,149 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
-  const { user, logout, isManager } = useAuth();
+  const { user, isManager } = useAuth();
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
-    <header className="app-header">
-      <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-        <div
-          className="app-brand"
-          style={{ cursor: 'pointer' }}
-          onClick={() => setActiveTab('dashboard')}
-        >
-          <div style={{
-            width: 32,
-            height: 32,
-            borderRadius: 'var(--radius-sm)',
-            backgroundColor: 'var(--primary)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <Boxes size={20} color="#fff" />
+    <>
+      <header className="top-nav">
+        {/* Brand & Invariant Ledger Status */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          <div className="brand-section" onClick={() => setActiveTab('dashboard')}>
+            <div className="brand-logo">
+              <Boxes size={18} />
+            </div>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span className="brand-title">StockSense</span>
+                <span className="brand-tag">v1.0</span>
+              </div>
+            </div>
           </div>
-          <span style={{ letterSpacing: '-0.02em' }}>StockSense</span>
-          <span className="brand-badge">IMS</span>
+
+          <div className="ledger-pulse" title="Append-only SQLite WAL Ledger Active">
+            <span className="pulse-dot" />
+            <span>LEDGER SYNCED</span>
+          </div>
         </div>
 
-        <nav className="nav-links">
+        {/* Central Architectural Navigation Pills */}
+        <nav className="nav-pill-container">
           <button
-            className={`nav-link ${activeTab === 'dashboard' ? 'active' : ''}`}
+            className={`nav-pill ${activeTab === 'dashboard' ? 'active' : ''}`}
             onClick={() => setActiveTab('dashboard')}
           >
-            <LayoutDashboard size={16} />
+            <LayoutDashboard size={14} />
             <span>Dashboard</span>
           </button>
 
           <button
-            className={`nav-link ${activeTab === 'products' ? 'active' : ''}`}
+            className={`nav-pill ${activeTab === 'products' ? 'active' : ''}`}
             onClick={() => setActiveTab('products')}
           >
-            <Package size={16} />
-            <span>Products</span>
+            <Package size={14} />
+            <span>Catalog</span>
           </button>
 
           <button
-            className={`nav-link ${activeTab === 'receipts' ? 'active' : ''}`}
+            className={`nav-pill ${activeTab === 'receipts' ? 'active' : ''}`}
             onClick={() => setActiveTab('receipts')}
           >
-            <ArrowDownToLine size={16} />
+            <ArrowDownToLine size={14} />
             <span>Receipts</span>
           </button>
 
           <button
-            className={`nav-link ${activeTab === 'deliveries' ? 'active' : ''}`}
+            className={`nav-pill ${activeTab === 'deliveries' ? 'active' : ''}`}
             onClick={() => setActiveTab('deliveries')}
           >
-            <ArrowUpFromLine size={16} />
+            <ArrowUpFromLine size={14} />
             <span>Deliveries</span>
           </button>
 
           <button
-            className={`nav-link ${activeTab === 'transfers' ? 'active' : ''}`}
+            className={`nav-pill ${activeTab === 'transfers' ? 'active' : ''}`}
             onClick={() => setActiveTab('transfers')}
           >
-            <ArrowLeftRight size={16} />
+            <ArrowLeftRight size={14} />
             <span>Transfers</span>
           </button>
 
           <button
-            className={`nav-link ${activeTab === 'adjustments' ? 'active' : ''}`}
+            className={`nav-pill ${activeTab === 'adjustments' ? 'active' : ''}`}
             onClick={() => setActiveTab('adjustments')}
           >
-            <ClipboardList size={16} />
+            <ClipboardList size={14} />
             <span>Adjustments</span>
           </button>
 
           <button
-            className={`nav-link ${activeTab === 'warehouses' ? 'active' : ''}`}
+            className={`nav-pill ${activeTab === 'warehouses' ? 'active' : ''}`}
             onClick={() => setActiveTab('warehouses')}
           >
-            <Building2 size={16} />
-            <span>Warehouses</span>
+            <Building2 size={14} />
+            <span>Facilities</span>
           </button>
 
           <button
-            className={`nav-link ${activeTab === 'walkthrough' ? 'active' : ''}`}
+            className={`nav-pill nav-pill-special ${activeTab === 'walkthrough' ? 'active' : ''}`}
             onClick={() => setActiveTab('walkthrough')}
-            style={{
-              color: activeTab === 'walkthrough' ? '#fff' : '#a5b4fc',
-              backgroundColor: activeTab === 'walkthrough' ? 'var(--primary)' : 'rgba(99, 102, 241, 0.1)',
-              borderColor: 'rgba(99, 102, 241, 0.3)'
-            }}
           >
-            <Sparkles size={16} />
-            <span>Seed Proof (77)</span>
+            <Sparkles size={14} />
+            <span>77 Proof</span>
           </button>
         </nav>
-      </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{
-            width: 32,
-            height: 32,
-            borderRadius: '50%',
-            backgroundColor: 'var(--bg-surface-elevated)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: '1px solid var(--border-medium)'
-          }}>
-            <UserIcon size={16} color="var(--text-secondary)" />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-primary)' }}>
-              {user?.name}
-            </span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span style={{
-                fontSize: 10,
-                fontWeight: 600,
-                textTransform: 'uppercase',
-                padding: '1px 6px',
-                borderRadius: 4,
-                backgroundColor: isManager ? 'rgba(99, 102, 241, 0.2)' : 'rgba(59, 130, 246, 0.2)',
-                color: isManager ? '#a5b4fc' : '#93c5fd'
-              }}>
-                {isManager ? 'Manager' : 'Staff'}
-              </span>
+        {/* User Profile Button */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <button
+            onClick={() => setIsProfileOpen(true)}
+            className="btn btn-secondary"
+            style={{
+              padding: '6px 14px',
+              borderRadius: 'var(--radius-full)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              fontSize: 'var(--text-xs)'
+            }}
+          >
+            <div style={{
+              width: 22,
+              height: 22,
+              borderRadius: '50%',
+              backgroundColor: '#ffffff',
+              color: '#000000',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 800,
+              fontSize: 11
+            }}>
+              {user?.name?.charAt(0).toUpperCase()}
             </div>
-          </div>
+            <span style={{ fontWeight: 600, color: '#ffffff' }}>{user?.name?.split(' ')[0]}</span>
+            <span style={{
+              fontSize: 10,
+              textTransform: 'uppercase',
+              letterSpacing: '0.04em',
+              padding: '1px 6px',
+              borderRadius: 4,
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              color: 'var(--text-secondary)'
+            }}>
+              {isManager ? 'Manager' : 'Staff'}
+            </span>
+            <ChevronDown size={14} color="var(--text-muted)" />
+          </button>
         </div>
+      </header>
 
-        <button
-          onClick={logout}
-          className="btn btn-secondary"
-          style={{ padding: '6px 12px', fontSize: 'var(--text-xs)' }}
-          title="Sign out"
-        >
-          <LogOut size={14} />
-          <span>Logout</span>
-        </button>
-      </div>
-    </header>
+      {/* Slide-Over Profile Drawer */}
+      <ProfileDrawer
+        isOpen={isProfileOpen}
+        onClose={() => setIsProfileOpen(false)}
+      />
+    </>
   );
 };

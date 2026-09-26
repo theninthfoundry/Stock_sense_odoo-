@@ -27,7 +27,7 @@ export const AuthPage: React.FC = () => {
     setIsLoading(true);
     try {
       await login(email, password);
-      toast.success('Welcome back to StockSense!');
+      toast.success('Authenticated to StockSense Ledger');
     } catch (err: any) {
       setFieldError({ field: err.field, message: err.message });
       toast.error(err.message || 'Login failed');
@@ -42,7 +42,7 @@ export const AuthPage: React.FC = () => {
     setIsLoading(true);
     try {
       await signup({ name, email, password, role });
-      toast.success('Account created successfully!');
+      toast.success('Account created successfully');
     } catch (err: any) {
       setFieldError({ field: err.field, message: err.message });
       toast.error(err.message || 'Signup failed');
@@ -104,62 +104,68 @@ export const AuthPage: React.FC = () => {
       alignItems: 'center',
       justifyContent: 'center',
       padding: 'var(--space-3)',
-      background: 'radial-gradient(ellipse at top, #1e1b4b 0%, #090d16 70%)'
+      backgroundColor: '#09090b',
+      position: 'relative'
     }}>
-      <div className="card" style={{
+      <div style={{
         width: '100%',
-        maxWidth: 440,
-        padding: 'var(--space-4)',
-        boxShadow: 'var(--shadow-lg)'
+        maxWidth: 420,
+        padding: '36px',
+        backgroundColor: '#121215',
+        border: '1px solid var(--border-medium)',
+        borderRadius: 'var(--radius-xl)',
+        boxShadow: 'var(--shadow-elevated)'
       }}>
         {/* Brand header */}
-        <div style={{ textAlign: 'center', marginBottom: 'var(--space-3)' }}>
+        <div style={{ textAlign: 'center', marginBottom: 28 }}>
           <div style={{
-            width: 48,
-            height: 48,
+            width: 44,
+            height: 44,
             borderRadius: 'var(--radius-md)',
-            backgroundColor: 'var(--primary)',
+            backgroundColor: '#ffffff',
+            color: '#000000',
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginBottom: 'var(--space-1)',
-            boxShadow: '0 0 20px var(--primary-glow)'
+            marginBottom: 12,
+            boxShadow: '0 0 24px rgba(255, 255, 255, 0.2)'
           }}>
-            <Boxes size={28} color="#fff" />
+            <Boxes size={24} />
           </div>
-          <h1 style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.03em' }}>
             StockSense
           </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-xs)', marginTop: 4 }}>
-            Immutable Stock Ledger & Real-Time Inventory Management
+            Immutable Stock Ledger & Inventory Engine
           </p>
         </div>
 
-        {/* Demo Fast Login Bar */}
+        {/* Demo Fast Fill Pills */}
         <div style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.03)',
+          backgroundColor: '#18181b',
           border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-sm)',
           padding: '8px 12px',
-          marginBottom: 'var(--space-3)',
+          marginBottom: 24,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           fontSize: 'var(--text-xs)'
         }}>
-          <span style={{ color: 'var(--text-muted)' }}>Quick Fill Demo:</span>
-          <div style={{ display: 'flex', gap: 8 }}>
+          <span style={{ color: 'var(--text-muted)' }}>Quick Demo:</span>
+          <div style={{ display: 'flex', gap: 6 }}>
             <button
               type="button"
               onClick={() => fillQuickDemo('manager')}
               style={{
-                background: 'rgba(99, 102, 241, 0.15)',
-                color: '#a5b4fc',
-                border: '1px solid rgba(99, 102, 241, 0.3)',
-                padding: '2px 8px',
-                borderRadius: 4,
+                background: '#ffffff',
+                color: '#09090b',
+                border: 'none',
+                padding: '3px 9px',
+                borderRadius: 'var(--radius-full)',
                 cursor: 'pointer',
-                fontSize: 11
+                fontSize: 11,
+                fontWeight: 600
               }}
             >
               Manager
@@ -168,13 +174,14 @@ export const AuthPage: React.FC = () => {
               type="button"
               onClick={() => fillQuickDemo('staff')}
               style={{
-                background: 'rgba(59, 130, 246, 0.15)',
-                color: '#93c5fd',
-                border: '1px solid rgba(59, 130, 246, 0.3)',
-                padding: '2px 8px',
-                borderRadius: 4,
+                background: 'rgba(255, 255, 255, 0.1)',
+                color: '#ffffff',
+                border: '1px solid var(--border-subtle)',
+                padding: '3px 9px',
+                borderRadius: 'var(--radius-full)',
                 cursor: 'pointer',
-                fontSize: 11
+                fontSize: 11,
+                fontWeight: 500
               }}
             >
               Staff
@@ -188,7 +195,7 @@ export const AuthPage: React.FC = () => {
             <div className="form-group">
               <label className="form-label">Email Address</label>
               <div style={{ position: 'relative' }}>
-                <Mail size={16} color="var(--text-muted)" style={{ position: 'absolute', left: 12, top: 12 }} />
+                <Mail size={15} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: 12 }} />
                 <input
                   type="email"
                   className="form-input"
@@ -207,13 +214,13 @@ export const AuthPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setMode('forgot')}
-                  style={{ background: 'none', border: 'none', color: '#a5b4fc', fontSize: 'var(--text-xs)', cursor: 'pointer' }}
+                  style={{ background: 'none', border: 'none', color: '#a1a1aa', fontSize: 'var(--text-xs)', cursor: 'pointer' }}
                 >
                   Forgot password?
                 </button>
               </div>
               <div style={{ position: 'relative' }}>
-                <Lock size={16} color="var(--text-muted)" style={{ position: 'absolute', left: 12, top: 12 }} />
+                <Lock size={15} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: 12 }} />
                 <input
                   type="password"
                   className="form-input"
@@ -232,21 +239,21 @@ export const AuthPage: React.FC = () => {
             <button
               type="submit"
               className="btn btn-primary"
-              style={{ width: '100%', marginTop: 'var(--space-1)' }}
+              style={{ width: '100%', marginTop: 8 }}
               disabled={isLoading}
             >
-              {isLoading ? <RefreshCw className="animate-spin" size={16} /> : <ArrowRight size={16} />}
-              <span>Sign In to Dashboard</span>
+              {isLoading ? <RefreshCw className="animate-spin" size={15} /> : <ArrowRight size={15} />}
+              <span>Sign In</span>
             </button>
 
-            <div style={{ textAlign: 'center', marginTop: 'var(--space-3)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
+            <div style={{ textAlign: 'center', marginTop: 20, fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
               Don't have an account?{' '}
               <button
                 type="button"
                 onClick={() => setMode('signup')}
-                style={{ background: 'none', border: 'none', color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}
+                style={{ background: 'none', border: 'none', color: '#ffffff', fontWeight: 600, cursor: 'pointer' }}
               >
-                Create Account
+                Sign Up
               </button>
             </div>
           </form>
@@ -258,7 +265,7 @@ export const AuthPage: React.FC = () => {
             <div className="form-group">
               <label className="form-label">Full Name</label>
               <div style={{ position: 'relative' }}>
-                <UserIcon size={16} color="var(--text-muted)" style={{ position: 'absolute', left: 12, top: 12 }} />
+                <UserIcon size={15} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: 12 }} />
                 <input
                   type="text"
                   className="form-input"
@@ -274,7 +281,7 @@ export const AuthPage: React.FC = () => {
             <div className="form-group">
               <label className="form-label">Email Address</label>
               <div style={{ position: 'relative' }}>
-                <Mail size={16} color="var(--text-muted)" style={{ position: 'absolute', left: 12, top: 12 }} />
+                <Mail size={15} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: 12 }} />
                 <input
                   type="email"
                   className="form-input"
@@ -290,7 +297,7 @@ export const AuthPage: React.FC = () => {
             <div className="form-group">
               <label className="form-label">Password</label>
               <div style={{ position: 'relative' }}>
-                <Lock size={16} color="var(--text-muted)" style={{ position: 'absolute', left: 12, top: 12 }} />
+                <Lock size={15} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: 12 }} />
                 <input
                   type="password"
                   className="form-input"
@@ -311,7 +318,7 @@ export const AuthPage: React.FC = () => {
                 onChange={(e) => setRole(e.target.value as any)}
               >
                 <option value="inventory_manager">Inventory Manager (Full Access)</option>
-                <option value="warehouse_staff">Warehouse Staff (Assigned Warehouse)</option>
+                <option value="warehouse_staff">Warehouse Staff (Assigned Facility)</option>
               </select>
             </div>
 
@@ -322,19 +329,19 @@ export const AuthPage: React.FC = () => {
             <button
               type="submit"
               className="btn btn-primary"
-              style={{ width: '100%', marginTop: 'var(--space-1)' }}
+              style={{ width: '100%', marginTop: 8 }}
               disabled={isLoading}
             >
-              {isLoading ? <RefreshCw className="animate-spin" size={16} /> : <ShieldCheck size={16} />}
+              {isLoading ? <RefreshCw className="animate-spin" size={15} /> : <ShieldCheck size={15} />}
               <span>Create Account</span>
             </button>
 
-            <div style={{ textAlign: 'center', marginTop: 'var(--space-3)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
-              Already have an account?{' '}
+            <div style={{ textAlign: 'center', marginTop: 20, fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
+              Already registered?{' '}
               <button
                 type="button"
                 onClick={() => setMode('login')}
-                style={{ background: 'none', border: 'none', color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}
+                style={{ background: 'none', border: 'none', color: '#ffffff', fontWeight: 600, cursor: 'pointer' }}
               >
                 Sign In
               </button>
@@ -345,19 +352,19 @@ export const AuthPage: React.FC = () => {
         {/* FORGOT PASSWORD FORM */}
         {mode === 'forgot' && (
           <form onSubmit={handleRequestOtp}>
-            <div style={{ marginBottom: 'var(--space-2)' }}>
-              <h2 style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--text-primary)' }}>
+            <div style={{ marginBottom: 16 }}>
+              <h2 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: '#ffffff' }}>
                 Password Recovery
               </h2>
               <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginTop: 4 }}>
-                Enter your account email. We will generate a secure 6-digit OTP valid for 5 minutes.
+                Enter your account email to receive a secure 6-digit OTP code.
               </p>
             </div>
 
             <div className="form-group">
               <label className="form-label">Email Address</label>
               <div style={{ position: 'relative' }}>
-                <Mail size={16} color="var(--text-muted)" style={{ position: 'absolute', left: 12, top: 12 }} />
+                <Mail size={15} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: 12 }} />
                 <input
                   type="email"
                   className="form-input"
@@ -376,14 +383,14 @@ export const AuthPage: React.FC = () => {
             <button
               type="submit"
               className="btn btn-primary"
-              style={{ width: '100%', marginTop: 'var(--space-1)' }}
+              style={{ width: '100%', marginTop: 8 }}
               disabled={isLoading}
             >
-              {isLoading ? <RefreshCw className="animate-spin" size={16} /> : <KeyRound size={16} />}
-              <span>Send 6-Digit OTP</span>
+              {isLoading ? <RefreshCw className="animate-spin" size={15} /> : <KeyRound size={15} />}
+              <span>Generate 6-Digit OTP</span>
             </button>
 
-            <div style={{ textAlign: 'center', marginTop: 'var(--space-3)', fontSize: 'var(--text-xs)' }}>
+            <div style={{ textAlign: 'center', marginTop: 20, fontSize: 'var(--text-xs)' }}>
               <button
                 type="button"
                 onClick={() => setMode('login')}
@@ -395,15 +402,15 @@ export const AuthPage: React.FC = () => {
           </form>
         )}
 
-        {/* RESET PASSWORD VIA OTP FORM */}
+        {/* RESET PASSWORD FORM */}
         {mode === 'reset' && (
           <form onSubmit={handleResetPassword}>
-            <div style={{ marginBottom: 'var(--space-2)' }}>
-              <h2 style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--text-primary)' }}>
-                Enter Verification Code
+            <div style={{ marginBottom: 16 }}>
+              <h2 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: '#ffffff' }}>
+                Enter Verification OTP
               </h2>
               <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginTop: 4 }}>
-                Enter the 6-digit OTP code sent to <strong>{email}</strong>
+                Enter the 6-digit code for <strong>{email}</strong>
               </p>
             </div>
 
@@ -411,22 +418,22 @@ export const AuthPage: React.FC = () => {
               <div style={{
                 padding: '8px 12px',
                 borderRadius: 'var(--radius-sm)',
-                backgroundColor: 'rgba(99, 102, 241, 0.15)',
-                border: '1px solid rgba(99, 102, 241, 0.4)',
-                marginBottom: 'var(--space-2)',
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid var(--border-medium)',
+                marginBottom: 16,
                 fontSize: 'var(--text-xs)',
-                color: '#c7d2fe'
+                color: '#ffffff'
               }}>
-                🔑 <strong>Demo Environment Code:</strong> <span style={{ fontFamily: 'var(--font-mono)', fontSize: 14, fontWeight: 700 }}>{generatedOtpHint}</span>
+                🔑 <strong>Generated OTP:</strong> <span style={{ fontFamily: 'var(--font-mono)', fontSize: 14, fontWeight: 700 }}>{generatedOtpHint}</span>
               </div>
             )}
 
             <div className="form-group">
-              <label className="form-label">6-Digit OTP</label>
+              <label className="form-label">6-Digit Code</label>
               <input
                 type="text"
                 className="form-input"
-                style={{ textAlign: 'center', letterSpacing: '0.3em', fontSize: 18, fontFamily: 'var(--font-mono)' }}
+                style={{ textAlign: 'center', letterSpacing: '0.25em', fontSize: 18, fontFamily: 'var(--font-mono)' }}
                 maxLength={6}
                 placeholder="123456"
                 value={otp}
@@ -438,7 +445,7 @@ export const AuthPage: React.FC = () => {
             <div className="form-group">
               <label className="form-label">New Password</label>
               <div style={{ position: 'relative' }}>
-                <Lock size={16} color="var(--text-muted)" style={{ position: 'absolute', left: 12, top: 12 }} />
+                <Lock size={15} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: 12 }} />
                 <input
                   type="password"
                   className="form-input"
@@ -457,14 +464,14 @@ export const AuthPage: React.FC = () => {
             <button
               type="submit"
               className="btn btn-primary"
-              style={{ width: '100%', marginTop: 'var(--space-1)' }}
+              style={{ width: '100%', marginTop: 8 }}
               disabled={isLoading}
             >
-              {isLoading ? <RefreshCw className="animate-spin" size={16} /> : <ShieldCheck size={16} />}
-              <span>Reset & Confirm Password</span>
+              {isLoading ? <RefreshCw className="animate-spin" size={15} /> : <ShieldCheck size={15} />}
+              <span>Reset & Sign In</span>
             </button>
 
-            <div style={{ textAlign: 'center', marginTop: 'var(--space-3)', fontSize: 'var(--text-xs)' }}>
+            <div style={{ textAlign: 'center', marginTop: 20, fontSize: 'var(--text-xs)' }}>
               <button
                 type="button"
                 onClick={() => setMode('login')}
