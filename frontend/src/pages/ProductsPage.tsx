@@ -242,7 +242,7 @@ export const ProductsPage: React.FC = () => {
               products.map((p) => (
                 <tr key={p.id} className={p.is_low_stock ? 'low-stock-row' : ''}>
                   <td>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#a5b4fc' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#ffffff' }}>
                       {p.sku}
                     </span>
                   </td>
@@ -280,7 +280,7 @@ export const ProductsPage: React.FC = () => {
                       }}
                       title="Click to view locations breakdown"
                     >
-                      <MapPin size={14} color="var(--primary)" />
+                      <MapPin size={14} color="#ffffff" />
                       <span>{p.total_stock} {p.uom}</span>
                     </button>
                   </td>
@@ -296,7 +296,7 @@ export const ProductsPage: React.FC = () => {
                         LOW STOCK
                       </span>
                     ) : (
-                      <span style={{ fontSize: 'var(--text-xs)', color: '#34d399', fontWeight: 600 }}>
+                      <span style={{ fontSize: 'var(--text-xs)', color: '#ffffff', fontWeight: 600 }}>
                         ✓ Healthy
                       </span>
                     )}
@@ -338,7 +338,7 @@ export const ProductsPage: React.FC = () => {
           <div className="modal-content" style={{ maxWidth: 540 }}>
             <div className="modal-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <MapPin size={20} color="var(--primary)" />
+                <MapPin size={20} color="#ffffff" />
                 <div>
                   <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700 }}>
                     {stockDetailProduct.name}
@@ -385,7 +385,7 @@ export const ProductsPage: React.FC = () => {
                           {loc.warehouse_name} • Code: <span style={{ fontFamily: 'var(--font-mono)' }}>{loc.location_code}</span>
                         </div>
                       </div>
-                      <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: loc.qty > 0 ? '#34d399' : 'var(--text-muted)' }}>
+                      <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: loc.qty > 0 ? '#ffffff' : 'var(--text-muted)' }}>
                         {loc.qty} {stockDetailProduct.uom}
                       </div>
                     </div>

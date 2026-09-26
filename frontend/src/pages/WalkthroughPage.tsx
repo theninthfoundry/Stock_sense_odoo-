@@ -187,8 +187,8 @@ export const WalkthroughPage: React.FC = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <Sparkles size={24} color="#a5b4fc" />
-            <h1 style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
+            <Sparkles size={24} color="#ffffff" />
+            <h1 style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em' }}>
               The Spec's Worked Example & 77-Stock Proof
             </h1>
           </div>
@@ -201,7 +201,6 @@ export const WalkthroughPage: React.FC = () => {
           onClick={handleRunAllSteps}
           className="btn btn-primary"
           disabled={isRunningAll}
-          style={{ boxShadow: '0 0 16px var(--primary-glow)' }}
         >
           <Play size={16} />
           <span>{isRunningAll ? 'Replaying Scenario...' : 'Run Entire Scenario In 1 Click'}</span>
@@ -211,12 +210,12 @@ export const WalkthroughPage: React.FC = () => {
       {/* Live Result Meter Card */}
       <div className="card" style={{
         padding: 'var(--space-3)',
-        background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(15, 23, 42, 0.9) 100%)',
-        border: '1px solid rgba(99, 102, 241, 0.3)'
+        background: '#0a0a0a',
+        border: '1px solid var(--border-medium)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
           <div>
-            <span style={{ fontSize: 'var(--text-xs)', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#a5b4fc', fontWeight: 600 }}>
+            <span style={{ fontSize: 'var(--text-xs)', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-muted)', fontWeight: 600 }}>
               Live Stock Level Derived From Ledger
             </span>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginTop: 4 }}>
@@ -234,10 +233,10 @@ export const WalkthroughPage: React.FC = () => {
                   gap: 6,
                   padding: '4px 12px',
                   borderRadius: 9999,
-                  backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                  color: '#34d399',
-                  border: '1px solid #059669',
-                  fontWeight: 700,
+                  backgroundColor: '#ffffff',
+                  color: '#000000',
+                  border: '1px solid #ffffff',
+                  fontWeight: 800,
                   fontSize: 'var(--text-xs)'
                 }}>
                   <ShieldCheck size={16} />
@@ -250,13 +249,13 @@ export const WalkthroughPage: React.FC = () => {
           <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
             <div style={{ textAlign: 'right' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Location A (Bulk)</div>
-              <div style={{ fontSize: 'var(--text-lg)', fontWeight: 800, color: '#f8fafc' }}>
+              <div style={{ fontSize: 'var(--text-lg)', fontWeight: 800, color: '#ffffff' }}>
                 {liveStockLocA ?? '—'}
               </div>
             </div>
             <div style={{ textAlign: 'right' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Location B (Picking)</div>
-              <div style={{ fontSize: 'var(--text-lg)', fontWeight: 800, color: '#f8fafc' }}>
+              <div style={{ fontSize: 'var(--text-lg)', fontWeight: 800, color: '#ffffff' }}>
                 {liveStockLocB ?? '—'}
               </div>
             </div>
@@ -267,10 +266,10 @@ export const WalkthroughPage: React.FC = () => {
       {/* 4-Step Interactive Execution Row */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-2)' }}>
         {/* Step 1 */}
-        <div className="card" style={{ padding: 'var(--space-3)', borderColor: step >= 1 ? '#059669' : 'var(--border-subtle)' }}>
+        <div className="card" style={{ padding: 'var(--space-3)', borderColor: step >= 1 ? '#ffffff' : 'var(--border-subtle)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#10b981', textTransform: 'uppercase' }}>Step 1: Inbound</span>
-            {step >= 1 && <CheckCircle2 size={16} color="#10b981" />}
+            <span style={{ fontSize: 11, fontWeight: 700, color: '#ffffff', textTransform: 'uppercase' }}>Step 1: Inbound</span>
+            {step >= 1 && <CheckCircle2 size={16} color="#ffffff" />}
           </div>
           <h3 style={{ fontSize: 'var(--text-sm)', fontWeight: 700 }}>Receive +100 Units</h3>
           <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', margin: '6px 0 14px' }}>
@@ -286,10 +285,10 @@ export const WalkthroughPage: React.FC = () => {
         </div>
 
         {/* Step 2 */}
-        <div className="card" style={{ padding: 'var(--space-3)', borderColor: step >= 2 ? '#059669' : 'var(--border-subtle)' }}>
+        <div className="card" style={{ padding: 'var(--space-3)', borderColor: step >= 2 ? '#ffffff' : 'var(--border-subtle)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#6366f1', textTransform: 'uppercase' }}>Step 2: Transfer</span>
-            {step >= 2 && <CheckCircle2 size={16} color="#10b981" />}
+            <span style={{ fontSize: 11, fontWeight: 700, color: '#ffffff', textTransform: 'uppercase' }}>Step 2: Transfer</span>
+            {step >= 2 && <CheckCircle2 size={16} color="#ffffff" />}
           </div>
           <h3 style={{ fontSize: 'var(--text-sm)', fontWeight: 700 }}>Move 40 Units</h3>
           <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', margin: '6px 0 14px' }}>
@@ -305,10 +304,10 @@ export const WalkthroughPage: React.FC = () => {
         </div>
 
         {/* Step 3 */}
-        <div className="card" style={{ padding: 'var(--space-3)', borderColor: step >= 3 ? '#059669' : 'var(--border-subtle)' }}>
+        <div className="card" style={{ padding: 'var(--space-3)', borderColor: step >= 3 ? '#ffffff' : 'var(--border-subtle)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#f59e0b', textTransform: 'uppercase' }}>Step 3: Outbound</span>
-            {step >= 3 && <CheckCircle2 size={16} color="#10b981" />}
+            <span style={{ fontSize: 11, fontWeight: 700, color: '#ffffff', textTransform: 'uppercase' }}>Step 3: Outbound</span>
+            {step >= 3 && <CheckCircle2 size={16} color="#ffffff" />}
           </div>
           <h3 style={{ fontSize: 'var(--text-sm)', fontWeight: 700 }}>Deliver −20 Units</h3>
           <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', margin: '6px 0 14px' }}>
@@ -324,10 +323,10 @@ export const WalkthroughPage: React.FC = () => {
         </div>
 
         {/* Step 4 */}
-        <div className="card" style={{ padding: 'var(--space-3)', borderColor: step >= 4 ? '#059669' : 'var(--border-subtle)' }}>
+        <div className="card" style={{ padding: 'var(--space-3)', borderColor: step >= 4 ? '#ffffff' : 'var(--border-subtle)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#ec4899', textTransform: 'uppercase' }}>Step 4: Reconcile</span>
-            {step >= 4 && <CheckCircle2 size={16} color="#10b981" />}
+            <span style={{ fontSize: 11, fontWeight: 700, color: '#ffffff', textTransform: 'uppercase' }}>Step 4: Reconcile</span>
+            {step >= 4 && <CheckCircle2 size={16} color="#ffffff" />}
           </div>
           <h3 style={{ fontSize: 'var(--text-sm)', fontWeight: 700 }}>Adjust −3 (Count: 37)</h3>
           <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', margin: '6px 0 14px' }}>
@@ -347,7 +346,7 @@ export const WalkthroughPage: React.FC = () => {
       <div style={{ marginTop: 'var(--space-2)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <Database size={16} color="var(--primary)" />
+            <Database size={16} color="#ffffff" />
             <h2 style={{ fontSize: 'var(--text-base)', fontWeight: 700 }}>
               The Immutable Stock Ledger (Audit Trail)
             </h2>
@@ -392,7 +391,7 @@ export const WalkthroughPage: React.FC = () => {
                       <span style={{
                         fontWeight: 800,
                         fontFamily: 'var(--font-mono)',
-                        color: row.delta > 0 ? '#34d399' : '#f87171'
+                        color: '#ffffff'
                       }}>
                         {row.delta > 0 ? `+${row.delta}` : row.delta} {row.uom}
                       </span>

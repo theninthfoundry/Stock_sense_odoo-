@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
-import { Navbar, ActiveTab } from './components/Navbar';
+import { Sidebar, ActiveTab } from './components/Sidebar';
 import { AuthPage } from './pages/AuthPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { ProductsPage } from './pages/ProductsPage';
@@ -23,10 +23,22 @@ const MainLayout: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'var(--bg-canvas)',
-        color: 'var(--text-secondary)'
+        backgroundColor: '#000000',
+        color: '#ffffff'
       }}>
-        Loading StockSense...
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+          <div style={{
+            width: 32,
+            height: 32,
+            border: '2px solid rgba(255, 255, 255, 0.2)',
+            borderTopColor: '#ffffff',
+            borderRadius: '50%',
+            animation: 'spin 0.8s linear infinite'
+          }} />
+          <span style={{ fontSize: 13, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255, 255, 255, 0.6)' }}>
+            Loading StockSense...
+          </span>
+        </div>
       </div>
     );
   }
@@ -36,18 +48,20 @@ const MainLayout: React.FC = () => {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <main className="app-main" style={{ flex: 1, width: '100%' }}>
-        {activeTab === 'dashboard' && <DashboardPage onNavigateTo={setActiveTab} />}
-        {activeTab === 'products' && <ProductsPage />}
-        {activeTab === 'receipts' && <ReceiptsPage />}
-        {activeTab === 'deliveries' && <DeliveriesPage />}
-        {activeTab === 'transfers' && <TransfersPage />}
-        {activeTab === 'adjustments' && <AdjustmentsPage />}
-        {activeTab === 'warehouses' && <WarehousesPage />}
-        {activeTab === 'walkthrough' && <WalkthroughPage />}
-      </main>
+    <div className="app-shell">
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <div className="app-viewport">
+        <main className="app-main">
+          {activeTab === 'dashboard' && <DashboardPage onNavigateTo={setActiveTab} />}
+          {activeTab === 'products' && <ProductsPage />}
+          {activeTab === 'receipts' && <ReceiptsPage />}
+          {activeTab === 'deliveries' && <DeliveriesPage />}
+          {activeTab === 'transfers' && <TransfersPage />}
+          {activeTab === 'adjustments' && <AdjustmentsPage />}
+          {activeTab === 'warehouses' && <WarehousesPage />}
+          {activeTab === 'walkthrough' && <WalkthroughPage />}
+        </main>
+      </div>
     </div>
   );
 };

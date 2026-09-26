@@ -206,14 +206,14 @@ export const TransfersPage: React.FC = () => {
                   </td>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                      <MapPin size={12} color="#f87171" />
+                      <MapPin size={12} color="#ffffff" />
                       <span>{t.from_location_name}</span>
                       <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>({t.from_warehouse_name})</span>
                     </div>
                   </td>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                      <MapPin size={12} color="#34d399" />
+                      <MapPin size={12} color="#ffffff" />
                       <span>{t.to_location_name}</span>
                       <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>({t.to_warehouse_name})</span>
                     </div>
@@ -243,7 +243,7 @@ export const TransfersPage: React.FC = () => {
                       </button>
                     )}
                     {t.status === 'done' && (
-                      <span style={{ fontSize: 'var(--text-xs)', color: '#34d399', fontWeight: 600 }}>
+                      <span style={{ fontSize: 'var(--text-xs)', color: '#ffffff', fontWeight: 600 }}>
                         ✓ Completed
                       </span>
                     )}
@@ -262,7 +262,7 @@ export const TransfersPage: React.FC = () => {
             <form onSubmit={handleCreate}>
               <div className="modal-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <ArrowLeftRight size={20} color="var(--primary)" />
+                  <ArrowLeftRight size={20} color="#ffffff" />
                   <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700 }}>Initiate Internal Transfer</h3>
                 </div>
                 <button

@@ -176,7 +176,7 @@ export const AdjustmentsPage: React.FC = () => {
                   </td>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                      <MapPin size={12} color="var(--primary)" />
+                      <MapPin size={12} color="#ffffff" />
                       <span>{a.location_name}</span>
                       <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>({a.warehouse_name})</span>
                     </div>
@@ -192,7 +192,7 @@ export const AdjustmentsPage: React.FC = () => {
                       alignItems: 'center',
                       gap: 4,
                       fontWeight: 700,
-                      color: a.delta > 0 ? '#34d399' : a.delta < 0 ? '#f87171' : 'var(--text-muted)'
+                      color: '#ffffff'
                     }}>
                       {a.delta > 0 && <TrendingUp size={14} />}
                       {a.delta < 0 && <TrendingDown size={14} />}
@@ -228,7 +228,7 @@ export const AdjustmentsPage: React.FC = () => {
             <form onSubmit={handleSubmit}>
               <div className="modal-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <ClipboardList size={20} color="var(--primary)" />
+                  <ClipboardList size={20} color="#ffffff" />
                   <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700 }}>Record Physical Inventory Count</h3>
                 </div>
                 <button

@@ -176,16 +176,17 @@ export const WarehousesPage: React.FC = () => {
                     width: 36,
                     height: 36,
                     borderRadius: 'var(--radius-sm)',
-                    backgroundColor: 'rgba(99, 102, 241, 0.15)',
+                    backgroundColor: 'var(--bg-canvas)',
+                    border: '1px solid var(--border-medium)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center'
                   }}>
-                    <Building2 size={20} color="var(--primary)" />
+                    <Building2 size={20} color="#ffffff" />
                   </div>
                   <div>
                     <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700 }}>{w.name}</h3>
-                    <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--font-mono)', color: '#a5b4fc' }}>
+                    <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
                       Code: {w.code}
                     </div>
                   </div>
@@ -204,7 +205,7 @@ export const WarehousesPage: React.FC = () => {
                     <button
                       onClick={() => handleDeleteWh(w.id, w.name)}
                       className="btn btn-secondary"
-                      style={{ padding: '4px 8px', fontSize: 'var(--text-xs)', color: '#f87171' }}
+                      style={{ padding: '4px 8px', fontSize: 'var(--text-xs)', color: '#ffffff' }}
                       title="Delete Warehouse"
                     >
                       <Trash2 size={12} />
@@ -231,7 +232,7 @@ export const WarehousesPage: React.FC = () => {
                       style={{
                         background: 'none',
                         border: 'none',
-                        color: 'var(--primary)',
+                        color: '#ffffff',
                         fontSize: 11,
                         fontWeight: 600,
                         cursor: 'pointer',
@@ -266,7 +267,7 @@ export const WarehousesPage: React.FC = () => {
                         }}
                       >
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                          <MapPin size={12} color="var(--primary)" />
+                          <MapPin size={12} color="#ffffff" />
                           <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600 }}>{loc.name}</span>
                           <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
                             [{loc.code}]
@@ -274,13 +275,13 @@ export const WarehousesPage: React.FC = () => {
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <span style={{ fontSize: 11, color: (loc.total_stock ?? 0) > 0 ? '#34d399' : 'var(--text-muted)' }}>
+                          <span style={{ fontSize: 11, color: (loc.total_stock ?? 0) > 0 ? '#ffffff' : 'var(--text-muted)' }}>
                             {loc.total_stock ?? 0} units
                           </span>
                           {isManager && (
                             <button
                               onClick={() => handleDeleteLoc(loc.id, loc.name)}
-                              style={{ background: 'none', border: 'none', color: '#f87171', cursor: 'pointer', opacity: 0.7 }}
+                              style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
                               title="Delete Location"
                             >
                               <Trash2 size={12} />

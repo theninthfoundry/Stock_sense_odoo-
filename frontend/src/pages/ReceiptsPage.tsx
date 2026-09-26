@@ -282,7 +282,7 @@ export const ReceiptsPage: React.FC = () => {
             <form onSubmit={handleCreate}>
               <div className="modal-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <ArrowDownToLine size={20} color="#10b981" />
+                  <ArrowDownToLine size={20} color="#ffffff" />
                   <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700 }}>Create Inbound Receipt</h3>
                 </div>
                 <button

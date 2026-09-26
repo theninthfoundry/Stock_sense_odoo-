@@ -303,7 +303,7 @@ export const DeliveriesPage: React.FC = () => {
             <form onSubmit={handleCreate}>
               <div className="modal-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <ArrowUpFromLine size={20} color="#60a5fa" />
+                  <ArrowUpFromLine size={20} color="#ffffff" />
                   <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700 }}>Create Delivery Order</h3>
                 </div>
                 <button
