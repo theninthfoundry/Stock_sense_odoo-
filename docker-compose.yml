@@ -1,0 +1,25 @@
+services:
+  stocksense:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stocksense-app
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - NODE_ENV=production
+      - JWT_SECRET=stocksense_prod_ultra_secure_secret_key_2026
+      - ALLOWED_ORIGIN=http://localhost:4000
+    volumes:
+      - stocksense-data:/app/data
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:4000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+volumes:
+  stocksense-data:

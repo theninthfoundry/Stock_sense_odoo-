@@ -1,0 +1,339 @@
+{
+  "info": {
+    "name": "StockSense Frozen API Collection",
+    "_postman_id": "7a35c24e-b530-4e3f-9150-e4b2d3080c35",
+    "description": "StockSense Frozen Contract API v1 Postman Collection for testing and integration.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Alex Manager\",\n  \"email\": \"manager@stocksense.com\",\n  \"password\": \"admin123\",\n  \"role\": \"inventory_manager\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/signup", "host": ["{{baseUrl}}"], "path": ["auth", "signup"] }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"manager@stocksense.com\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Request OTP",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"manager@stocksense.com\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/otp/request", "host": ["{{baseUrl}}"], "path": ["auth", "otp", "request"] }
+          }
+        },
+        {
+          "name": "Reset Password via OTP",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"manager@stocksense.com\",\n  \"otp\": \"123456\",\n  \"newPassword\": \"newAdminPassword123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/otp/reset", "host": ["{{baseUrl}}"], "path": ["auth", "otp", "reset"] }
+          }
+        },
+        {
+          "name": "Get Profile (Me)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth", "me"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List Products",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/products?search=&category_id=&low_stock=",
+              "host": ["{{baseUrl}}"],
+              "path": ["products"],
+              "query": [
+                { "key": "search", "value": "" },
+                { "key": "category_id", "value": "" },
+                { "key": "low_stock", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sku\": \"IND-SENS-99\",\n  \"name\": \"Smart Thermal Probe\",\n  \"category_id\": \"cat_elec_001\",\n  \"uom\": \"Units\",\n  \"reorder_min\": 10,\n  \"reorder_max\": 100\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        },
+        {
+          "name": "Get Product Stock Breakdown",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/products/prod_sensor_001/stock", "host": ["{{baseUrl}}"], "path": ["products", "prod_sensor_001", "stock"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Receipts",
+      "item": [
+        {
+          "name": "List Receipts",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/receipts?status=&warehouse_id=", "host": ["{{baseUrl}}"], "path": ["receipts"] }
+          }
+        },
+        {
+          "name": "Create Receipt",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"warehouse_id\": \"wh_main_001\",\n  \"party\": \"Apex Supplies Ltd\",\n  \"reference\": \"PO-1002\",\n  \"status\": \"ready\",\n  \"lines\": [\n    {\n      \"product_id\": \"prod_sensor_001\",\n      \"location_id\": \"loc_a_001\",\n      \"expected_qty\": 100,\n      \"received_qty\": 100\n    }\n  ]\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/receipts", "host": ["{{baseUrl}}"], "path": ["receipts"] }
+          }
+        },
+        {
+          "name": "Validate Receipt",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "X-Idempotency-Key", "value": "idemp-rcpt-001" }
+            ],
+            "url": { "raw": "{{baseUrl}}/receipts/:id/validate", "host": ["{{baseUrl}}"], "path": ["receipts", ":id", "validate"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Deliveries",
+      "item": [
+        {
+          "name": "List Deliveries",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/deliveries?status=&warehouse_id=", "host": ["{{baseUrl}}"], "path": ["deliveries"] }
+          }
+        },
+        {
+          "name": "Create Delivery Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"warehouse_id\": \"wh_main_001\",\n  \"party\": \"Global Tech Industries\",\n  \"reference\": \"SO-5002\",\n  \"status\": \"ready\",\n  \"lines\": [\n    {\n      \"product_id\": \"prod_sensor_001\",\n      \"location_id\": \"loc_a_001\",\n      \"expected_qty\": 20,\n      \"picked_qty\": 20\n    }\n  ]\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/deliveries", "host": ["{{baseUrl}}"], "path": ["deliveries"] }
+          }
+        },
+        {
+          "name": "Validate Delivery Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "X-Idempotency-Key", "value": "idemp-deliv-001" }
+            ],
+            "url": { "raw": "{{baseUrl}}/deliveries/:id/validate", "host": ["{{baseUrl}}"], "path": ["deliveries", ":id", "validate"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transfers",
+      "item": [
+        {
+          "name": "List Transfers",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/transfers?status=", "host": ["{{baseUrl}}"], "path": ["transfers"] }
+          }
+        },
+        {
+          "name": "Create Transfer",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": \"prod_sensor_001\",\n  \"qty\": 40,\n  \"from_location_id\": \"loc_a_001\",\n  \"to_location_id\": \"loc_b_002\",\n  \"status\": \"ready\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/transfers", "host": ["{{baseUrl}}"], "path": ["transfers"] }
+          }
+        },
+        {
+          "name": "Validate Transfer",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "X-Idempotency-Key", "value": "idemp-trsf-001" }
+            ],
+            "url": { "raw": "{{baseUrl}}/transfers/:id/validate", "host": ["{{baseUrl}}"], "path": ["transfers", ":id", "validate"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Adjustments",
+      "item": [
+        {
+          "name": "List Adjustments",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/adjustments", "host": ["{{baseUrl}}"], "path": ["adjustments"] }
+          }
+        },
+        {
+          "name": "Create Adjustment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": \"prod_sensor_001\",\n  \"location_id\": \"loc_b_002\",\n  \"counted_qty\": 37,\n  \"reason\": \"Physical cycle count adjustment (-3 calibration loss)\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/adjustments", "host": ["{{baseUrl}}"], "path": ["adjustments"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Get KPIs",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/dashboard/kpis?warehouse=&category=", "host": ["{{baseUrl}}"], "path": ["dashboard", "kpis"] }
+          }
+        },
+        {
+          "name": "Get Tabbed Operations",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/dashboard/operations?type=&status=", "host": ["{{baseUrl}}"], "path": ["dashboard", "operations"] }
+          }
+        },
+        {
+          "name": "Get Stock Ledger Audit Trail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/dashboard/ledger", "host": ["{{baseUrl}}"], "path": ["dashboard", "ledger"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "item": [
+        {
+          "name": "List Warehouses",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/warehouses", "host": ["{{baseUrl}}"], "path": ["warehouses"] }
+          }
+        },
+        {
+          "name": "List Locations",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/locations", "host": ["{{baseUrl}}"], "path": ["locations"] }
+          }
+        }
+      ]
+    }
+  ]
+}
